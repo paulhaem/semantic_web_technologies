@@ -14,8 +14,6 @@ const recursiveAsyncReadLine = () => {
       if (answer.length === 0) {
         return rl.close()
       }
-      // index time
-      buildVocabulary()
 
       // query time
       const queryTerms = answer.toLowerCase().split(' ')
@@ -26,6 +24,9 @@ const recursiveAsyncReadLine = () => {
       recursiveAsyncReadLine()
   })
 }
+
+// index time
+buildVocabulary()
 
 recursiveAsyncReadLine()
 
