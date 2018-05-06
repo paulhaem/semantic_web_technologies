@@ -3,7 +3,6 @@ import fs from 'fs'
 import _ from 'lodash'
 
 const path = './simple-wikipedia/corpus/'
-// const path = './resources/'
 const vocabulary = new Map()
 
 const rl = readline.createInterface({
@@ -21,7 +20,7 @@ const recursiveAsyncReadLine = () => {
       const queryTerms = answer.toLowerCase().split(' ')
       const results = search(queryTerms)
       const top5 = Array.from(results).sort((a, b) => {
-        return a[1].score - b[1].score;
+        return b[1].score - a[1].score;
       }).slice(0, 5)
 
       console.log(`Found ${results.size} results, showing top 5`)
