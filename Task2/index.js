@@ -21,7 +21,7 @@ const recursiveAsyncReadLine = () => {
       const queryTerms = answer.toLowerCase().split(' ')
       const results = search(queryTerms)
       const top5 = Array.from(results).sort((a, b) => {
-        return a.score - b.score;
+        return a[1].score - b[1].score;
       }).slice(0, 5)
 
       console.log(`Found ${results.size} results, showing top 5`)
