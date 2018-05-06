@@ -4,6 +4,8 @@
 
 `npm install`
 
+`simple-wikipedia` files are part of the .gitignore file. Hence, the folder must first be added to the folder before running the application.
+
 ## Start
 
 `npm start`
