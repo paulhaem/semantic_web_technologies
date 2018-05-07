@@ -42,7 +42,7 @@ const recursiveAsyncReadLine = () => {
 // index time
 buildVocabulary()
 
-// start recusrive asking for query
+// start recursive asking for query
 recursiveAsyncReadLine()
 
 // Implementation: index time
@@ -86,16 +86,27 @@ function buildVocabulary() {
 // Implementation: query time
 function search(queryTerms) {
   const queries = Array.from(queryTerms)
-  let results = new Set(Array.from(vocabulary.get(queries[0]).docs.keys()))
-  queries.shift()
+
+  // search operator: OR  
+  let results = [];
+  
+  // search operator: AND  
+  // let results = new Set(Array.from(vocabulary.get(queries[0]).docs.keys()))
+  // queries.shift()
 
   queries.forEach(query => {
-    const files = new Set(Array.from(vocabulary.get(query).docs.keys()))
+    // search operator: AND
+    // const files = new Set(Array.from(vocabulary.get(query).docs.keys()))
+    //    
+    // if(files) {
+    //   results = new Set(  
+    //     [...results].filter(x => files.has(x)));
+    // }
 
-    if (files) {
-      results = new Set(
-        [...results].filter(x => files.has(x)));
-    }
+    // search operator: OR
+    const files = Array.from(vocabulary.get(query).docs.keys())
+    
+    results = _.union(results, files)
   })
 
   const documents = Array.from(results)
@@ -111,6 +122,9 @@ function search(queryTerms) {
 
     queryTerms.forEach(term => {
       let termScore = Math.round(vocabulary.get(term).docs.get(document) * vocabulary.get(term).idf)
+      if(isNaN(termScore))
+        termScore = 0;
+        
       result.get(document).terms.set(term, termScore)
       result.get(document).score = result.get(document).score + termScore
     })
